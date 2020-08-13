@@ -5,7 +5,7 @@ namespace Snono\Socialite\Two;
 use Exception;
 use Illuminate\Support\Arr;
 
-class PassportProvider extends AbstractProvider implements ProviderInterface
+class UnimartProvider extends AbstractProvider implements ProviderInterface
 {
     /**
      * The scopes being requested.

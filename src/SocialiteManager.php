@@ -13,7 +13,7 @@ use Snono\Socialite\Two\GithubProvider;
 use Snono\Socialite\Two\GitlabProvider;
 use Snono\Socialite\Two\GoogleProvider;
 use Snono\Socialite\Two\LinkedInProvider;
-use Snono\Socialite\Two\PassportProvider;
+use Snono\Socialite\Two\UnimartProvider;
 use League\OAuth1\Client\Server\Twitter as TwitterServer;
 
 class SocialiteManager extends Manager implements Contracts\Factory
@@ -48,9 +48,9 @@ class SocialiteManager extends Manager implements Contracts\Factory
      *
      * @return \Snono\Socialite\Two\AbstractProvider
      */
-    protected function createPassportDriver()
+    protected function createUnimartDriver()
     {
-        $config = $this->app->make('config')['services.passport'];
+        $config = $this->app->make('config')['services.unimart'];
 
         return $this->buildProvider(
             PassportProvider::class, $config
