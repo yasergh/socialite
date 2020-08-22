@@ -4,6 +4,7 @@ namespace Snono\Socialite\Two;
 
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 
 class UnimartProvider extends AbstractProvider implements ProviderInterface
 {
@@ -13,14 +14,13 @@ class UnimartProvider extends AbstractProvider implements ProviderInterface
      * @var array
      */
     protected $scopes = ['*'];
-    private $url = 'http://localhost:8000';
 
     /**
      * {@inheritdoc}
      */
     protected function getAuthUrl($state)
     {
-        return $this->buildAuthUrlFromBase($this->url.'/oauth/authorize', $state);
+        return $this->buildAuthUrlFromBase($this->baseUrl.'/oauth/authorize', $state);
     }
 
     /**
@@ -28,8 +28,10 @@ class UnimartProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getTokenUrl()
     {
-        return $this->url.'/oauth/token';
+        return $this->baseUrl.'/oauth/token';
     }
+
+
 
     /**
      * {@inheritdoc}
@@ -54,11 +56,14 @@ class UnimartProvider extends AbstractProvider implements ProviderInterface
     }
     protected function getUserByToken($token)
     {
-        $userUrl = $this->url.'/api/user';
+        Log::info($this->getRequestOptions($token));
+        $userUrl = $this->baseUrl.'/api/user';
 
         $response = $this->getHttpClient()->get(
             $userUrl, $this->getRequestOptions($token)
         );
+
+        Log::info("response->getBody():");
 
         $user = json_decode($response->getBody(), true);
 
@@ -77,7 +82,7 @@ class UnimartProvider extends AbstractProvider implements ProviderInterface
      */
     protected function getEmailByToken($token)
     {
-        $emailsUrl = $this->url.'/api/user/emails';
+        $emailsUrl = $this->baseUrl.'/api/user/emails';
 
         try {
             $response = $this->getHttpClient()->get(

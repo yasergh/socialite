@@ -3,6 +3,7 @@
 namespace Snono\Socialite;
 
 use Illuminate\Support\Arr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Manager;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
@@ -53,7 +54,7 @@ class SocialiteManager extends Manager implements Contracts\Factory
         $config = $this->app->make('config')['services.unimart'];
 
         return $this->buildProvider(
-            PassportProvider::class, $config
+            UnimartProvider::class, $config
         );
     }
 
@@ -137,8 +138,11 @@ class SocialiteManager extends Manager implements Contracts\Factory
     public function buildProvider($provider, $config)
     {
         return new $provider(
-            $this->app->make('request'), $config['client_id'],
-            $config['client_secret'], $this->formatRedirectUrl($config),
+            $this->app->make('request'),
+            $config['client_id'],
+            $config['client_secret'],
+            $this->formatRedirectUrl($config),
+            isset($config['base_url']) ? $config['base_url'] : null,
             Arr::get($config, 'guzzle', [])
         );
     }

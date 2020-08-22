@@ -17,4 +17,11 @@ interface Provider
      * @return \Snono\Socialite\Contracts\User
      */
     public function user();
+
+    /**
+     * Get the User instance for the authenticated user.
+     *
+     * @return \Snono\Socialite\Contracts\User
+     */
+    public function token();
 }

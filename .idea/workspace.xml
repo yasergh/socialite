@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="577103ef-fe5f-4709-837c-c046b20013db" name="Default Changelist" comment="Add Passport Driver">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SocialiteManager.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/SocialiteManager.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Two/PassportProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Two/UnimartProvider.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,6 +140,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="ToolWindowCommit.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Two" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -240,7 +239,14 @@
       <option name="project" value="LOCAL" />
       <updated>1597343274367</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Add Passport Driver">
+      <created>1597345655945</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1597345655945</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,10 +286,10 @@
       <screen x="-1920" y="23" width="1920" height="1057" />
     </state>
     <state x="-1183" y="449" key="ComposerInitDialogKey/0.23.1920.1013/-1920.23.1920.1057/1920.23.1920.1057@-1920.23.1920.1057" timestamp="1597335980981" />
-    <state x="-1361" y="272" key="Vcs.Push.Dialog.v2" timestamp="1597343309942">
+    <state x="-1361" y="272" key="Vcs.Push.Dialog.v2" timestamp="1597345710460">
       <screen x="-1920" y="23" width="1920" height="1057" />
     </state>
-    <state x="-1361" y="272" key="Vcs.Push.Dialog.v2/0.23.1920.1013/-1920.23.1920.1057/1920.23.1920.1057@-1920.23.1920.1057" timestamp="1597343309942" />
+    <state x="-1361" y="272" key="Vcs.Push.Dialog.v2/0.23.1920.1013/-1920.23.1920.1057/1920.23.1920.1057@-1920.23.1920.1057" timestamp="1597345710460" />
     <state x="559" y="262" key="Vcs.Push.Dialog.v2/0.23.1920.1013/-1920.23.1920.1057/1920.23.1920.1057@0.23.1920.1013" timestamp="1597320851680" />
     <state x="2479" y="272" key="Vcs.Push.Dialog.v2/0.23.1920.1013/-1920.23.1920.1057/1920.23.1920.1057@1920.23.1920.1057" timestamp="1597331818935" />
     <state x="-1254" y="302" width="586" height="548" key="find.popup" timestamp="1597335089540">

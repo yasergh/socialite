@@ -6,6 +6,7 @@ use GuzzleHttp\Client;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Snono\Socialite\Contracts\Provider as ProviderContract;
 
@@ -24,6 +25,13 @@ abstract class AbstractProvider implements ProviderContract
      * @var \GuzzleHttp\Client
      */
     protected $httpClient;
+
+    /**
+     * The Base URL.
+     *
+     * @var string
+     */
+    protected $baseUrl;
 
     /**
      * The client ID.
@@ -45,6 +53,20 @@ abstract class AbstractProvider implements ProviderContract
      * @var string
      */
     protected $redirectUrl;
+
+    /**
+     * The  Email.
+     *
+     * @var string
+     */
+    protected $email;
+
+    /**
+     * The password.
+     *
+     * @var string
+     */
+    protected $password;
 
     /**
      * The custom parameters to be sent with the request.
@@ -91,17 +113,20 @@ abstract class AbstractProvider implements ProviderContract
     /**
      * Create a new provider instance.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  string  $clientId
-     * @param  string  $clientSecret
-     * @param  string  $redirectUrl
-     * @param  array  $guzzle
-     * @return void
+     * @param \Illuminate\Http\Request $request
+     * @param string $clientId
+     * @param string $clientSecret
+     * @param string $redirectUrl
+     * @param $baseUrl
+     * @param array $guzzle
      */
-    public function __construct(Request $request, $clientId, $clientSecret, $redirectUrl, $guzzle = [])
+    public function __construct(Request $request, $clientId, $clientSecret, $redirectUrl, $baseUrl, $guzzle = [])
     {
+        Log::info('request');
+        Log::info($request);
         $this->guzzle = $guzzle;
         $this->request = $request;
+        $this->baseUrl = $baseUrl;
         $this->clientId = $clientId;
         $this->redirectUrl = $redirectUrl;
         $this->clientSecret = $clientSecret;
@@ -121,6 +146,7 @@ abstract class AbstractProvider implements ProviderContract
      * @return string
      */
     abstract protected function getTokenUrl();
+
 
     /**
      * Get the raw user for the given access token.
@@ -221,6 +247,27 @@ abstract class AbstractProvider implements ProviderContract
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function token()
+    {
+        if ($this->hasInvalidState()) {
+            throw new InvalidStateException;
+        }
+
+        $response = $this->getTokenEmailAndPasswordResponse();
+        Log::info($response);
+
+        $user = $this->mapUserToObject($this->getUserByToken(
+            $token = Arr::get($response, 'access_token')
+        ));
+
+        return $user->setToken($token)
+            ->setRefreshToken(Arr::get($response, 'refresh_token'))
+            ->setExpiresIn(Arr::get($response, 'expires_in'));
+    }
+
+    /**
      * Get a Social User instance from a known access token.
      *
      * @param  string  $token
@@ -244,7 +291,8 @@ abstract class AbstractProvider implements ProviderContract
             return false;
         }
 
-        $state = $this->request->session()->pull('state');
+        $state = $this->request->state;
+        Log::info($state);
 
         return ! (strlen($state) > 0 && $this->request->input('state') === $state);
     }
@@ -266,6 +314,22 @@ abstract class AbstractProvider implements ProviderContract
     }
 
     /**
+     * Get the access token response for the given code.
+     *
+     * @param  string  $code
+     * @return array
+     */
+    public function getTokenEmailAndPasswordResponse()
+    {
+        $response = $this->getHttpClient()->post($this->getTokenUrl(), [
+            'headers' => ['Accept' => 'application/json'],
+            'form_params' => $this->getTokenByEmailAndPasswordFields(),
+        ]);
+
+        return json_decode($response->getBody(), true);
+    }
+
+    /**
      * Get the POST fields for the token request.
      *
      * @param  string  $code
@@ -278,6 +342,24 @@ abstract class AbstractProvider implements ProviderContract
             'client_secret' => $this->clientSecret,
             'code' => $code,
             'redirect_uri' => $this->redirectUrl,
+        ];
+    }
+
+    /**
+     * Get the POST fields for the token request.
+     *
+     * @param  string  $code
+     * @return array
+     */
+    protected function getTokenByEmailAndPasswordFields()
+    {
+        return [
+            'grant_type' => 'password',
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret,
+            'username' => $this->email,
+            'password' => $this->password,
+            'scope' => '',
         ];
     }
 
@@ -339,6 +421,35 @@ abstract class AbstractProvider implements ProviderContract
 
         return $this;
     }
+
+    /**
+     * Set the Email .
+     *
+     * @param  string  $email
+     * @return $this
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Set the Email .
+     *
+     * @param  string  $password
+     * @return $this
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        Log::info('Password:'. $this->password);
+        return $this;
+    }
+
+
 
     /**
      * Get a instance of the Guzzle HTTP client.
