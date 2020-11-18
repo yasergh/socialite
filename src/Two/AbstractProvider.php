@@ -179,6 +179,22 @@ abstract class AbstractProvider implements ProviderContract
     }
 
     /**
+     * Redirect the user of the application to the provider's authentication screen.
+     *
+     * @return string
+     */
+    public function redirectToString()
+    {
+        $state = null;
+
+        if ($this->usesState()) {
+            $this->request->session()->put('state', $state = $this->getState());
+        }
+
+        return $this->getAuthUrl($state);
+    }
+
+    /**
      * Build the authentication URL for the provider from the given base URL.
      *
      * @param  string  $url

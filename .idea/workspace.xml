@@ -19,7 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="577103ef-fe5f-4709-837c-c046b20013db" name="Default Changelist" comment="" />
+    <list default="true" id="577103ef-fe5f-4709-837c-c046b20013db" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +35,12 @@
     </execution>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
@@ -182,7 +190,7 @@
       <workItem from="1597320605533" duration="1426000" />
       <workItem from="1597331288695" duration="9053000" />
       <workItem from="1605726828512" duration="1172000" />
-      <workItem from="1605728108928" duration="1725000" />
+      <workItem from="1605728108928" duration="2593000" />
     </task>
     <task id="LOCAL-00001" summary="Add Passport Driver">
       <created>1597320850055</created>
@@ -296,7 +304,21 @@
       <option name="project" value="LOCAL" />
       <updated>1605729885624</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Add Passport Driver">
+      <created>1605729981840</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1605729981840</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add Passport Driver">
+      <created>1605730065163</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1605730065163</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
