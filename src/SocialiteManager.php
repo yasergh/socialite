@@ -43,6 +43,7 @@ class SocialiteManager extends Manager implements Contracts\Factory
         );
     }
 
+
     /**
      * Create an instance of the specified driver.
      *
