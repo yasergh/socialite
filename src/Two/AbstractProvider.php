@@ -122,8 +122,6 @@ abstract class AbstractProvider implements ProviderContract
      */
     public function __construct(Request $request, $clientId, $clientSecret, $redirectUrl, $baseUrl, $guzzle = [])
     {
-        Log::info('request');
-        Log::info($request);
         $this->guzzle = $guzzle;
         $this->request = $request;
         $this->baseUrl = $baseUrl;
